@@ -1,7 +1,7 @@
-Facilino Junior
+Pi-Blocks
 =========
 
-Visual programming environment for Arduino.
+Visual programming environment for Raspberry Pi.
 
 
 Install
@@ -12,8 +12,6 @@ Check INSTALL file.
 
 Requirements
 ------------
-
-In order to Facilino to execute sketches, install Arduino IDE >= 1.6.
 
 
 Releases
