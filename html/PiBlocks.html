@@ -1,0 +1,347 @@
+<html>
+<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="robots" content="Index,Allow">
+    	<meta name="description" content="Block programming environment for Raspberry Pi"/>
+		<link rel="shortcut icon" href="assets/images/piblocks-cuadrado-fondo-transparente-128x128.png" type="image/x-icon">
+    	<meta name="keywords" content="piblocks,robot,raspberry,pi,dyor" />
+    	<meta name="author" content="Robótica Fácil"/>
+    	<title>&pi;Blocks</title>
+    	
+		<link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="piblocks.css">
+    	<link rel="stylesheet" type="text/css" href="javascript/highlight/styles/default.css">
+	<style>
+		select.icon-menu option {
+background-repeat:no-repeat;
+background-position:bottom left;
+padding-left:30px;
+}
+	</style>
+	</head>
+<body>
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smooth-scroll/smooth-scroll.js"></script>
+  <script src="assets/dropdown/js/script.min.js"></script>
+  <script src="assets/touch-swipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/theme/js/script.js"></script>
+  
+  <script src="javascript/jquery/dist/jquery.min.js"></script>
+    <script src="javascript/underscore/underscore.js"></script>
+    <script src="javascript/highlight/highlight.pack.js"></script>
+    <script src="javascript/blockly/blockly_compressed.js"></script>
+    <script src="javascript/blockly/python_compressed.js"></script>
+    <script src="piblocks.js"></script>
+	<xml id='startBlocks' style='display: none'><block type='controls_setupLoopFinish' deletable='true' x='20' y='5'></block></xml>
+
+	<div>
+	<section class="menu cid-qAignIVLHL" once="menu" id="menu1-e" data-rv-view="7">
+	<nav class="navbar navbar-expand beta-menu align-items-center navbar-fixed-top navbar-toggleable-sm">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <div class="menu-logo">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="https://roboticafacil.es" target="_blank">
+                         <img src="assets/images/piblocks-cuadrado-fondo-transparente-512x512.png" alt="PiBlocks" title="PiBlocks" media-simple="true" style="height: 3.8rem;">
+                    </a>
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="https://roboticafacil.es" target="_blank"><h2>&nbsp;&nbsp;&pi;-Blocks</h2></a></span>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item dropdown open"><a class="nav-link link text-white dropdown-toggle display-4" data-toggle="dropdown-submenu" aria-expanded="true">
+                        
+                        File</a><div class="dropdown-menu"><button class="text-white dropdown-item display-4" onclick="resetWorkspace()" aria-expanded="false">New</button><button class="text-white dropdown-item display-4" onclick="document.getElementById('fileInput').click();" aria-expanded="false">Upload</button><input id="fileInput" type="file" style="display: none;" accept=".bly," onchange="fileSelected(this.files)"></input><button class="text-white dropdown-item display-4" onclick="butSave()" aria-expanded="false">Download</button><button class="text-white dropdown-item display-4" onclick="butExport()" aria-expanded="false">Export</button></div></li><li class="nav-item"><a class="nav-link link text-white display-4" aria-expanded="false"></a></li><li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" aria-expanded="false" data-toggle="dropdown-submenu">
+                        
+                        Edit</a><div class="dropdown-menu"><button id="undo" class="text-white dropdown-item display-4" onclick="butUndo()" aria-expanded="false">Undo</button><button id="redo" class="text-white dropdown-item display-4" onclick="butRedo()" aria-expanded="false">Redo</button></div></li></ul>
+            <div class="navbar-buttons mbr-section-btn"><button class="btn btn-sm btn-primary-outline display-4" title="Language settings" onclick="showHideLanguage()"><span class="mbri-flag mbr-iconfont mbr-iconfont-btn" style="color: rgb(255, 148, 0);"></span></button></div>
+			<select id="language" class="text-black dropdown-toggle display-6 icon-menu" onchange="langChange(this.value)" style="display: none">
+		<option value="ca-ES" class="text-black dropdown-item display-6" style="background-image:url(img/flags/catalonia.png)">Catal&agrave;</option>
+		<option value="da-DK" class="text-black dropdown-item display-6" style="background-image:url(img/flags/denmark.png)">Dansk</option>
+		<option value="de-DE" class="text-black dropdown-item display-6" style="background-image:url(img/flags/germany.png)">Deutsch</option>
+		<option value="en-GB" class="text-black dropdown-item display-6" style="background-image:url(img/flags/united-kingdom.png)">English</option>
+		<option value="es-ES" class="text-black dropdown-item display-6" style="background-image:url(img/flags/spain.png)">Espa&ntilde;ol</option>
+		<option value="es-LT" class="text-black dropdown-item display-6" style="background-image:url(img/flags/spain.png)">Espa&ntilde;ol (latino)</option>
+		<option value="eu-ES" class="text-black dropdown-item display-6" style="background-image:url(img/flags/basque-country.png)">Euskera</option>
+		<option value="fr-FR" class="text-black dropdown-item display-6" style="background-image:url(img/flags/france.png)">Fran&ccedil;ais</option>
+		<option value="gl-ES" class="text-black dropdown-item display-6" style="background-image:url(img/flags/galician.png)">Galego</option>
+		<option value="it-IT" class="text-black dropdown-item display-6" style="background-image:url(img/flags/italy.png)">Italiano</option>
+		<option value="nl-NL" class="text-black dropdown-item display-6" style="background-image:url(img/flags/netherlands.png)">Nederlands</option>
+		<option value="nb-NO" class="text-black dropdown-item display-6" style="background-image:url(img/flags/norway.png)">Norsk</option>
+		<option value="pl-PL" class="text-black dropdown-item display-6" style="background-image:url(img/flags/poland.png)">Polski</option>
+		<option value="pt-PT" class="text-black dropdown-item display-6" style="background-image:url(img/flags/portugal.png)">Portugues</option>
+		<option value="ru-RU" class="text-black dropdown-item display-6" style="background-image:url(img/flags/russia.png)">&#x420;&#x443;&#x441;&#x441;&#x43a;&#x438;&#x439;</option>
+		</select>
+		<div class="navbar-buttons mbr-section-btn"><button class="btn btn-sm btn-primary-outline display-4" title="Hardware settings" onclick="showHideProcessor()"><span class="mbri-setting3 mbr-iconfont mbr-iconfont-btn" style="color: rgb(255, 148, 0);"></span></button></div>
+			<select id="hardware" class="text-black dropdown-toggle display-6 icon-menu" onchange="processorChange(this.value)" style="display: none">
+		<option value="RaspberryPi3B+" class="text-black dropdown-item display-6">Raspberry Pi 3B+</option>
+		<option value="RaspberryPiZeroW" class="text-black dropdown-item display-6">Raspberry Pi Zero W</option>
+		</select>
+		</div>
+	</nav>
+	</section>
+	</div>
+	<!-- <xml id='startBlocks' style='display: none'> <block type='controls_setupLoopFinish' deletable='true'></block> </xml>-->
+	<div id="wrap" style="height: 89%;">
+        <div id="blockly" style="float: left; width: 66%;">
+			<span id="position"></span>
+			<div id="dragbar"></div>
+		</div>
+		<div id="code_doc" style="float: left; width: 34%;">
+          <div id="code" style="float: none; width: 100%; height: 50%;">
+		  </div>
+		  <span id="position1"></span>
+			<div id="dragbar1" style="float: none; width=100%;"></div>
+		  <div id="doc" style="float: none; width: 100%; height: 50%;">
+		  </div>
+		</div>
+    </div>
+	<div><input type="file" id="importFile" style="display:none" accept=".png," onchange="imageSelected(this.files)"></input><canvas id="canvas" width="578" height="400" style="display:none"></div>
+	
+    <script language="JavaScript">
+		if (localStorage.getItem("language")===undefined || localStorage.getItem("language")===null)
+			localStorage.setItem('language', 'en-GB');
+		if (localStorage.getItem("hardware")===undefined || localStorage.getItem("hardware")===null)
+			localStorage.setItem('hardware', 'RaspberryPiZeroW');
+		if (localStorage.getItem("saved")===undefined || localStorage.getItem("saved")===null)
+			localStorage.setItem('saved', '');
+		window.RaspberryPiLanguage = localStorage.getItem("language");
+		window.RaspberryPiHardware = localStorage.getItem("hardware");
+		$.ajax({url: 'lang/piblocks_'+window.RaspberryPiLanguage+'.json',dataType: "text",async: false,}).done(function(text) {window.langKeys = $.parseJSON(text).langs[window.RaspberryPiLanguage].keys;});
+		$.ajax({url: 'lang/piblocks_en-GB.json',dataType: "text",async: false,}).done(function(text) {window.langKeysEng = $.parseJSON(text).langs['en-GB'].keys;});
+		$("#language").val(window.RaspberryPiLanguage);
+		$("#hardware").val(window.RaspberryPiHardware);
+		var ev = document.createEvent('Event');
+		ev.initEvent('resize', true, true);
+		
+        PiBlocks.load({ zoom: 1});
+		// New workspace for each test case
+		var el = document.getElementById('blockly');
+		//console.log(Blockly.createToolbox());
+		
+		Blockly.inject(el, {toolbox: Blockly.createToolbox(), zoom: {controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2}});
+		// Create a default setup/loop block
+		//Blockly.getMainWorkspace().clear();
+		if (localStorage.getItem("saved")!=='')
+		  Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),Blockly.getMainWorkspace());
+		$('.blocklySvg, #blockly').height('100%');
+		$('.blocklySvg').width('100%');
+		
+		$("#redo").hide();
+		
+		if (localStorage.getItem("saved")!=='')
+		{
+		  Blockly.getMainWorkspace().clear();
+		  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(localStorage.getItem("saved")),Blockly.getMainWorkspace())
+		}
+		var History = {};
+		History.stack = [];
+		History.initialState ='';
+		History.position=0;
+		History.limit=200;
+		History.updating=false;
+		History.stack[0]=Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()));
+		
+		if (localStorage.getItem("saved")=='')
+		  Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),Blockly.getMainWorkspace());
+		$('.blocklySvg, #blockly').height('100%');
+		$('.blocklySvg').width('100%');
+		
+        // Update code
+			
+        Blockly.getMainWorkspace().addChangeListener(function () {
+		$('#code').html('<code class="c++"><pre>'
+		  + escapeCode(Blockly.Python.workspaceToCode(Blockly.getMainWorkspace()))
+		  + '</pre></code>');
+		  // Highlight
+		$("pre").each(function (i, e) {
+		  hljs.highlightBlock(e);
+		});
+			//Save History
+			var current = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()));
+			if ((current !== History.stack[History.position])&&(current!==History.initialState))
+				History.updating=true;
+			//console.log(History.updating);
+			if (History.updating)
+			{
+				while (History.stack.length > History.limit) {
+					History.stack.shift();
+				}
+				History.position = Math.min(History.position,History.stack.length - 1);
+				History.stack = History.stack.slice(0, History.position + 1);
+				History.stack.push(current);
+				localStorage.setItem('saved',current);
+				History.position++;
+				if (History.position > 0)
+					$("#undo").show();
+				else
+					$("#undo").hide();
+				if (History.position<(History.stack.length-1))
+					$("#redo").show();
+				else
+					$("#redo").hide();
+				//console.log('Saving position '+History.position);
+				History.updating=false;
+				//console.log(History.updating);
+			}
+		});
+			//});
+            
+            // Show/hide code
+            function escapeCode(code) {
+                var str = code;
+                str = str.replace(/</g, "&lt;");
+                str = str.replace(/>/g, "&gt;");
+                return str;
+            }
+
+            function resetWorkspace() {
+				History.stack = [];
+				History.initialState ='';
+				History.position=0;
+                Blockly.mainWorkspace.clear();
+                Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),Blockly.getMainWorkspace());
+            }
+		
+		function fileSelected(input){
+			if (input.length>0)
+			{
+				var file = input[0];
+				var reader = new FileReader();
+				reader.readAsText(file);
+				reader.onload = function(e){
+					var xmlData = $(reader.result);
+					Blockly.mainWorkspace.clear();
+					Blockly.Xml.domToWorkspace(xmlData[0],Blockly.getMainWorkspace());
+				};
+			}
+		}
+		
+		function butSave()
+		{
+			var link = document.createElement('a');
+			var text = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()));
+			link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+			link.download = 'filename.bly';
+			document.body.appendChild(link);
+			link.click();
+		}
+		
+		function butExport()
+		{
+			var link = document.createElement('a');
+			var text = Blockly.Python.workspaceToCode(Blockly.getMainWorkspace());
+			link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+			link.download = 'filename.ino';
+			document.body.appendChild(link);
+			link.click();
+		}
+		
+		function butUndo()
+		{
+			if (History.position>0){
+				var item =  History.stack[--History.position];
+				if (History.position > 0)
+					$("#undo").show();
+				else
+					$("#undo").hide();
+				if (History.position<(History.stack.length-1))
+					$("#redo").show();
+				else
+					$("#redo").hide();
+				Blockly.getMainWorkspace().clear();
+				Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(item),Blockly.getMainWorkspace());
+				//console.log('Undo: '+History.position);
+			}
+		}
+		
+		function butRedo()
+		{
+			if (History.position<(History.stack.length-1))
+			{
+				var item = History.stack[++History.position];
+				if (History.position > 0)
+					$("#undo").show();
+				else
+					$("#undo").hide();
+				if (History.position<(History.stack.length-1))
+					$("#redo").show();
+				else
+					$("#redo").hide();
+				Blockly.getMainWorkspace().clear();
+				Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(item),Blockly.getMainWorkspace());
+				//console.log('Redo: '+History.position);
+			}
+		}
+		
+		function langChange(lang)
+		{
+			localStorage.setItem('language',lang);
+			window.location.reload();
+		}
+		
+		function processorChange(hardware)
+		{
+			localStorage.setItem('hardware',hardware);
+			window.location.reload();
+		}
+		
+		function copyToClipboard()
+		{ 
+			var r = document.createRange();
+			r.selectNode(document.getElementById("code"));
+			window.getSelection().addRange(r);
+			document.execCommand("copy");
+			r.selectNode(document.body);
+			window.getSelection().addRange(r);
+			clearSelection();
+		}
+		
+		function showHideLanguage()
+		{
+			var lang=document.getElementById('language');
+			//console.log(lang.style.display);
+			if (lang.style.display==='none')
+				lang.style.display='initial';
+			else
+				lang.style.display='none';
+		}
+		
+		function showHideProcessor()
+		{
+			var proc=document.getElementById('hardware');
+			if (proc.style.display==='none')
+				proc.style.display='initial';
+			else
+				proc.style.display='none';
+		}
+		
+		function clearSelection() {
+			if ( document.selection ) {
+				document.selection.empty();
+			} else if ( window.getSelection ) {
+				window.getSelection().removeAllRanges();
+			}
+		}
+		</script>
+</body>
+</html>

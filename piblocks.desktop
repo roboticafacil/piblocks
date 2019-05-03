@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=PiBlocks
+Comment=Visual Programming Environment for Raspberry Pi
+Icon=/usr/share/piblocks/icons/icon.png
+Exec=piblocks %f
+TryExec=piblocks
+Categories=Education;Development;
+StartupNotify=true
+Terminal=false
