@@ -86,7 +86,7 @@
 				"LANG_MATH_NUMBER_TOOLTIP": "Number",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Arithmetic operation",
 				"LANG_MATH_SELF_ARITHMETIC_TOOLTIP": "Arithmetic operation on a variable",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Re-scales the input from [0-1023] to another range.",
+				"LANG_MATH_SCALING_TOOLTIP": "Re-scales the input from a range to another range.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Min/max operation between two numbers",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Returns a random number between the two limits.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Returns the value of a variable.",

@@ -65,7 +65,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Возвращает обратное значение логического аргумента.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Целое",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Арифметическая операция",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Входные значения массива в диапазоне [0-1023] для другого диапазона значений.",
+				"LANG_MATH_SCALING_TOOLTIP": "Повторное масштабирование ввода из диапазона в другой диапазон.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Min/max операция",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "создает случайное число в интервале между двумя пороговыми значениями.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Возвращает значение переменной",

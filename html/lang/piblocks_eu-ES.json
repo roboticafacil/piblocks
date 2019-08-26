@@ -64,7 +64,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Sarreraren kontrakoa bueltatzen du.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Zenbakia",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Eragiketa aritmetikoa",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "[0-1023] tartetik beste balio tarte batera mapeatzen du sarrera.",
+				"LANG_MATH_SCALING_TOOLTIP": "[0-1023] tartetik beste balio tarte batera mapeatzen du sarrera.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Eragiketa min/max",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Zehaztutako bi mugen artean ausazko zenbaki bat sortzen du.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Aldagai baten balioa bueltatu",

@@ -67,7 +67,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Devuelve lo contrario de la entrada (verdadero o falso).",
 				"LANG_MATH_NUMBER_TOOLTIP": "Número",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Operación aritmética",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Reescala la entrada con rango [0,1023] al rango de valores indicado.",
+				"LANG_MATH_SCALING_TOOLTIP": "Vuelve a escalar la entrada de un rango a otro rango.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Operación min/max entre dos números",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Crea un número aleatorio entre los dos valores introducidos.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Devuelve el valor de una variable",

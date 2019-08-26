@@ -64,7 +64,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Retorna o inverso da entrada.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Número inteiro",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Operação aritmética",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Mapeia o intervalo de valores da entrada [0-1023] a outro intervalo de valores.",
+				"LANG_MATH_SCALING_TOOLTIP": "Mapeia o intervalo de valores da entrada [0-1023] a outro intervalo de valores.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Operação min/max",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Retorna um número aleatório entre os dois limites.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Retorna o valor de uma variável.",

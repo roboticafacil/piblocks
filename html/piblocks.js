@@ -291,7 +291,7 @@
             var __t, __p = '',
                 __e = _.escape;
             with(obj) {
-                __p += 'digitalWrite(' +
+                __p += 'board.digital_write(' +
                     ((__t = (dropdown_pin)) == null ? '' : __t) +
                     ',' +
                     ((__t = (dropdown_stat)) == null ? '' : __t) +
@@ -301,15 +301,30 @@
             return __p
         };
 
+		this["JST"]["import_neopixel"] = function(obj) {
+				obj || (obj = {});
+				var __t, __p = '',
+					__e = _.escape;
+				with(obj) {
+					__p += 'import time'+ '\n' +
+							'import board'+ '\n'+
+							'import neopixel'+ '\n' ;
+
+				}
+				return __p
+			};
 
         this["JST"]["inout_digital_read"] = function(obj) {
             obj || (obj = {});
             var __t, __p = '',
                 __e = _.escape;
             with(obj) {
-                __p += 'digitalRead(' +
-                    ((__t = (dropdown_pin)) == null ? '' : __t) +
-                    ')';
+            
+            Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
+                __p += 'GPIO.setup(' +
+                    ((__t = (dropdown_pin)) == null ? '' : __t) +',GPIO.IN)\n'+
+                    'GPIO.input('+
+                    ((__t = (dropdown_pin)) == null ? '' : __t) +')';
 
             }
             return __p
@@ -367,9 +382,9 @@
             var __t, __p = '',
                 __e = _.escape;
             with(obj) {
-                __p += 'if (Serial.available()>0){\n' +
+                __p += 'if (Serial.available()>0):\n' +
                     ((__t = (branch)) == null ? '' : __t) +
-                    '\n}\n';
+                    '\n\n';
 
             }
             return __p
@@ -395,10 +410,12 @@
                 __e = _.escape;
             with(obj) {
                 __p +=
-                    ((__t = (string1)) == null ? '' : __t) +
-                    '.equalsIgnoreCase(' +
-                    ((__t = (string2)) == null ? '' : __t) +
-                    ')';
+                	'string1 = '+((__t = (string1)) == null ? '' : __t)+ '\n'+
+					'string2 = '+((__t = (string2)) == null ? '' : __t)+ '\n'+
+					'if string1.lower() == string2.lower():'+'\n'+
+    					'	print("True")'+'\n'+
+					'else:'+'\n'+
+   		 				'	print("False")';
 
             }
             return __p
@@ -410,8 +427,8 @@
                 __e = _.escape;
             with(obj) {
                 __p +=
-                    ((__t = (argument0)) == null ? '' : __t) +
-                    '.length()';
+                    'len('+((__t = (argument0)) == null ? '' : __t) +
+                    ')';
 
             }
             return __p
@@ -423,8 +440,8 @@
                 __e = _.escape;
             with(obj) {
                 __p +=
-                    ((__t = (argument0)) == null ? '' : __t) +
-                    '.toLowerCase()';
+                	'string= '+((__t = (argument0)) == null ? '' : __t)+'\n'+
+					'string= string.lower()';
 
             }
             return __p
@@ -436,8 +453,8 @@
                 __e = _.escape;
             with(obj) {
                 __p +=
-                    ((__t = (argument0)) == null ? '' : __t) +
-                    '.toUpperCase()';
+                	'string= '+((__t = (argument0)) == null ? '' : __t)+'\n'+
+					'string= string.upper()';
 
             }
             return __p
@@ -513,17 +530,13 @@
 				var __t, __p = '',
 					__e = _.escape;
 				with(obj) {
-					__p += 'if (distance(' +
-						((__t = (trigger_pin)) == null ? '' : __t) +
-						',' +
-						((__t = (echo_pin)) == null ? '' : __t) +
-						')<(' +
+					__p += 'if distance<(' +
 				((__t = (distance)) == null ? '' : __t) +
-				')){\n' +
+				'):\n' +
 				((__t = (collision)) == null ? '' : __t) +
-				'\n}\nelse\n{\n' +
+				'\n\nelse:\n\n' +
 				((__t = (not_collision)) == null ? '' : __t) +
-				'}';
+				'';
 				}
 				return __p
 			};
@@ -606,16 +619,53 @@
 			};
 
 
-		this["JST"]["softwareserial_def_definitions"] = function(obj) {
+		this["JST"]["import_randint"] = function(obj) {
 				obj || (obj = {});
 				var __t, __p = '',
 					__e = _.escape;
 				with(obj) {
-					__p += '#include <SoftwareSerial.h>';
+					__p += 'import random';
 
 				}
 				return __p
 			};
+		this["JST"]["import_gpioboard"] = function(obj) {
+				obj || (obj = {});
+				var __t, __p = '',
+					__e = _.escape;
+				with(obj) {
+					__p += 'import RPi.GPIO as GPIO'+ '\n' +
+							'import time'+ '\n'+
+							'GPIO.setmode(GPIO.BOARD)'+ '\n' ;
+
+				}
+				return __p
+			};
+		this["JST"]["import_gpiobcm"] = function(obj) {
+				obj || (obj = {});
+				var __t, __p = '',
+					__e = _.escape;
+				with(obj) {
+					__p += 'import RPi.GPIO as GPIO'+ '\n' +
+							'import time'+ '\n'+
+							'GPIO.setmode(GPIO.BCM)'+ '\n' ;
+
+				}
+				return __p
+			};
+		this["JST"]["import_neopixel"] = function(obj) {
+				obj || (obj = {});
+				var __t, __p = '',
+					__e = _.escape;
+				with(obj) {
+					__p += 'import BOARD'+ '\n' +
+							'import neopixel'+ '\n'+
+							'import time'+ '\n' ;
+
+				}
+				return __p
+			};
+			
 
         this["JST"]["bt_softwareserial_def_setups"] = function(obj) {
             obj || (obj = {});
@@ -2198,9 +2248,9 @@ Blockly.Python.math_arithmetic.OPERATORS = {
 	MINUS: ['-', Blockly.Python.ORDER_ADDITIVE],
 	MULTIPLY: ['*', Blockly.Python.ORDER_MULTIPLICATIVE],
 	DIVIDE: ['/', Blockly.Python.ORDER_MULTIPLICATIVE],
-	POWER: ['^', Blockly.Python.ORDER_EXPONENTIATION],
+	POWER: ['**', Blockly.Python.ORDER_EXPONENTIATION],
 	MODULUS: ['%', Blockly.Python.ORDER_MULTIPLICATIVE],
-	MODULUS: ['//', Blockly.Python.ORDER_MULTIPLICATIVE]
+	FLOOR: ['//', Blockly.Python.ORDER_MULTIPLICATIVE]
 };
 
 Blockly.Blocks.math_arithmetic = {
@@ -2226,7 +2276,7 @@ Blockly.Blocks.math_arithmetic.OPERATORS = [
 	['-', 'MINUS'],
 	['\u00D7', 'MULTIPLY'],
 	['\u00F7', 'DIVIDE'],
-	['^','POWER'],
+	['**','POWER'],
 	['%','MODULUS'],
 	['//','FLOOR']
 ];
@@ -2332,40 +2382,35 @@ Blockly.Blocks.math_self_arithmetic.OPERATORS = [
 	['//=','FLOOR']
 ];
 		
-		Blockly.Python.base_map = function() {
+		Blockly.Python.scaling = function() {
             var value_num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_NONE);
-			var value_dmin = Blockly.Python.valueToCode(this, 'DMIN', Blockly.Python.ORDER_ATOMIC);
-            var value_dmax = Blockly.Python.valueToCode(this, 'DMAX', Blockly.Python.ORDER_ATOMIC);
+			var Frommin = Blockly.Python.valueToCode(this, 'FROM_MIN', Blockly.Python.ORDER_ATOMIC);
+            var Frommax = Blockly.Python.valueToCode(this, 'FROM_MAX', Blockly.Python.ORDER_ATOMIC);
+			var Tomin = Blockly.Python.valueToCode(this, 'TO_MIN', Blockly.Python.ORDER_ATOMIC);
+            var Tommax = Blockly.Python.valueToCode(this, 'TO_MAX', Blockly.Python.ORDER_ATOMIC);
 
-            var code = '';
-            var a = PiBlocks.findPinMode(value_num);
-            code += a['code'];
-            value_num = a['pin'];
-
-            a = PiBlocks.findPinMode(value_dmax);
-            code += a['code'];
-            value_dmax = a['pin'];
-			
-			code += 'map('+value_num+',0,1023,'+value_dmin+','+value_dmax+')';
+            var code = '(('+Tommax+'-'+Tomin+')	*(('+value_num+'-'+Frommin+')/('+Frommax+'-'+Frommin+'))+'+Tomin+')';
 
             return [code, Blockly.Python.ORDER_ATOMIC];
         };
 
-        Blockly.Blocks.base_map = {
+        Blockly.Blocks.scaling = {
             category: PiBlocks.locales.getKey('LANG_CATEGORY_MATH'),
             category_colour: PiBlocks.LANG_COLOUR_MATH,
 			colour: PiBlocks.LANG_COLOUR_MATH,
-			keys: ['LANG_MATH_BASE_MAP_TOOLTIP'],
+			keys: ['LANG_MATH_SCALING_TOOLTIP'],
 			output: 'number',
             init: function() {
                 this.setColour(PiBlocks.LANG_COLOUR_MATH);
                 this.appendValueInput('NUM', Number).appendField(new Blockly.FieldImage('img/blocks/enlarge.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
-                this.appendValueInput('DMIN', Number).appendField(new Blockly.FieldImage('img/blocks/from2.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
-				this.appendValueInput('DMAX', Number).setCheck(Number);
-				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/to2.svg',20*options.zoom,20*options.zoom));
+                this.appendValueInput('FROM_MIN', Number).appendField(new Blockly.FieldImage('img/blocks/sbox.svg',20*options.zoom,20*options.zoom)).appendField(new Blockly.FieldImage('img/blocks/left_bracket.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
+				this.appendValueInput('FROM_MAX', Number).appendField(new Blockly.FieldImage('img/blocks/colon.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
+				this.appendValueInput('TO_MIN', Number).appendField(new Blockly.FieldImage('img/blocks/right_bracket.svg',20*options.zoom,20*options.zoom)).appendField(new Blockly.FieldImage('img/blocks/rarrow.svg',20*options.zoom,20*options.zoom)).appendField(new Blockly.FieldImage('img/blocks/left_bracket.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
+				this.appendValueInput('TO_MAX', Number).appendField(new Blockly.FieldImage('img/blocks/colon.svg',20*options.zoom,20*options.zoom)).setCheck(Number);
+				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/right_bracket.svg',20*options.zoom,20*options.zoom));
                 this.setInputsInline(true);
                 this.setOutput(true,Number);
-                this.setTooltip(PiBlocks.locales.getKey('LANG_MATH_BASE_MAP_TOOLTIP'));
+                this.setTooltip(PiBlocks.locales.getKey('LANG_MATH_SCALING_TOOLTIP'));
             }
         };
 		
@@ -2406,7 +2451,13 @@ Blockly.Python.math_random = function() {
 		return ['',Blockly.Python.ORDER_ATOMIC];
 	if (range.type==='list_range')
 	{
-		Blockly.Python.setups_['setup_randomseed'] = 'random.seed()\n';
+		//Blockly.Python.setups_['setup_randomseed'] = 'random.seed()\n';
+		//Blockly.Python.definitions_['declare_var_SoftwareSerial' + dropdown_pin] = 'SoftwareSerial _bt_softwareSerial(' + dropdown_pin + ',' + NextPIN + ');\n';
+            //Blockly.Python.definitions_['import_randomint'] = 'import randint from random';
+            Blockly.Python.definitions_['import_randomint'] = JST['import_randint']({});
+            //Blockly.Python.definitions_['declare_var_random_seed'] = '_seed=1';
+            //Blockly.Python.definitions_['declare_var_random_seed2'] = '_seed2=1';
+			//Blockly.Python.setups_['setup_softwareserial_'] = JST['bt_softwareserial_def_setups']({'baud_rate': baud_rate});
 		var code = 'random.randint('+Blockly.Python.valueToCode(range,'FROM',Blockly.Python.ORDER_NONE)+','+Blockly.Python.valueToCode(range,'TO',Blockly.Python.ORDER_NONE)+')'; 
 	}
 	else
@@ -3195,7 +3246,7 @@ Blockly.Blocks.text_substring = {
 };
 
         Blockly.Python.text_length = function() {
-            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_UNARY_POSTFIX) || '';
+            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_NONE) || '';
             var code = '';
             code += JST['text_length']({'argument0': argument0});
             return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
@@ -3221,7 +3272,7 @@ Blockly.Blocks.text_substring = {
             string1 = string1.replace(/&quot;/g, '"');
             var string2 = Blockly.Python.valueToCode(this, 'STRING2', Blockly.Python.ORDER_NONE);
             string2 = string2.replace(/&quot;/g, '"');
-            var code = '';
+            var code = ''; 
             code += JST['text_equalsIgnoreCase']({
                 'string1': string1,
                 'string2': string2
@@ -3247,10 +3298,10 @@ Blockly.Blocks.text_substring = {
         };
 		
 		Blockly.Python.text_lower = function() {
-            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_UNARY_POSTFIX) || '';
+            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_NONE) || '';
             var code = '';
             code += JST['text_lower']({'argument0': argument0});
-            return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
+            return [code, Blockly.Python.ORDER_NONE];
         };
 
         Blockly.Blocks.text_lower = {
@@ -3269,10 +3320,10 @@ Blockly.Blocks.text_substring = {
         };
 		
 		Blockly.Python.text_upper = function() {
-            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_UNARY_POSTFIX) || '';
+            var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_NONE) || '';
             var code = '';
             code += JST['text_upper']({'argument0': argument0});
-            return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
+            return [code, Blockly.Python.ORDER_NONE];
         };
 
         Blockly.Blocks.text_upper = {
@@ -3289,7 +3340,7 @@ Blockly.Blocks.text_substring = {
                 this.setTooltip(PiBlocks.locales.getKey('LANG_TEXT_LENGTH_UPPER_TOOLTIP'));
             }
         };
-		
+/*		
 		Blockly.Python.text_to_number = function() {
             var str = Blockly.Python.valueToCode(this,'STRING', Blockly.Python.ORDER_NONE);
 			var code='';
@@ -3310,7 +3361,7 @@ Blockly.Blocks.text_substring = {
                 this.setTooltip(PiBlocks.locales.getKey('LANG_TEXT_NUMBER_CAST_TOOLTIP'));
             }
         };
-		
+*/		
 		Blockly.Python.inout_digital_read = function() {
             var dropdown_pin = this.getFieldValue('PIN');
             var code = '';
@@ -3336,10 +3387,11 @@ Blockly.Blocks.text_substring = {
 			
         Blockly.Python.inout_digital_write = function() {
             var dropdown_pin = this.getFieldValue('PIN');
-            var dropdown_stat = Blockly.Python.valueToCode(this, 'STAT', Blockly.Python.ORDER_ATOMIC);
+            var state = Blockly.Python.valueToCode(this, 'STATE', Blockly.Python.ORDER_ATOMIC);
             var code = '';
+            Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
             Blockly.Python.setups_['setup_digital_write_' + dropdown_pin] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pin});
-            code += 'digitalWrite('+dropdown_pin+','+dropdown_stat+')\n';
+            code += 'GPIO.output('+dropdown_pin+','+state+')\n';
             return code;
         };
 
@@ -3351,7 +3403,7 @@ Blockly.Blocks.text_substring = {
             init: function() {
                 this.setColour(PiBlocks.LANG_COLOUR_ADVANCED);
                 this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/write.svg',20*options.zoom,20*options.zoom)).appendField(new Blockly.FieldImage("img/blocks/digital_signal.svg",20*options.zoom, 20*options.zoom)).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN');
-                this.appendValueInput('STAT').appendField(new Blockly.FieldImage('img/blocks/binary.svg',20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput('STATE').appendField(new Blockly.FieldImage('img/blocks/binary.svg',20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT);
                 this.setPreviousStatement(true,'code');
                 this.setInputsInline(true);
                 this.setNextStatement(true,'code');
@@ -3363,7 +3415,7 @@ Blockly.Blocks.text_substring = {
             var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
             var code = '';
             Blockly.Python.setups_['setup_serial'] = JST['serial_setups']({'bitrate': profiles.default.serial});
-            code += 'Serial.println(' + content+');\n';
+            code += 'print(' + content+')\n';
             return code;
         };
 
@@ -3380,7 +3432,7 @@ Blockly.Blocks.text_substring = {
                 this.setTooltip(PiBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINTLN_TOOLTIP'));
             }
         };
-
+/*
         Blockly.Python.serial_available = function() {
             var branch = Blockly.Python.statementToCode(this, 'DO');
             branch = branch.replace(/&quot;/g, '"');
@@ -3455,12 +3507,16 @@ Blockly.Blocks.text_substring = {
             }
         };
         
-		
+	*/	
         Blockly.Python.button = function() {
             var dropdown_pin = this.getFieldValue('PIN');
             var code = '';
+            
+            Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
             Blockly.Python.setups_['setup_button_' + dropdown_pin] = 'pinMode(' +dropdown_pin+',INPUT);\n';
-            code += 'digitalRead(' +dropdown_pin+')';
+            code += 'GPIO.setup(' +dropdown_pin+',GPIO.IN,pull_up_down=GPIO.PUD_DOWN)\n';
+            code += 'GPIO.input(' +dropdown_pin+')\n';
+            code += 'print(GPIO.input('+dropdown_pin+'))\n';
             return [code, Blockly.Python.ORDER_ATOMIC];
         };
 
@@ -3481,6 +3537,7 @@ Blockly.Blocks.text_substring = {
         Blockly.Python.button_case = function() {
             var dropdown_pin = this.getFieldValue('PIN');
             var code = '';
+            Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
             Blockly.Python.setups_['setup_button_' + dropdown_pin] = 'pinMode(' +dropdown_pin+',INPUT);\n';
 			var code_pressed = '';
 			var code_not_pressed = '';
@@ -3488,8 +3545,8 @@ Blockly.Blocks.text_substring = {
 			code_not_pressed += Blockly.Python.statementToCode(this, 'NOT_PRESSED');
 			code_pressed = code_pressed.replace(/&quot;/g, '"');
 			code_not_pressed = code_not_pressed.replace(/&quot;/g, '"');
-
-            code += 'if ('+'digitalRead(' +dropdown_pin+')==LOW){\n'+code_pressed+'\n}\nelse{\n'+code_not_pressed+'\n}\n';
+            code += 'GPIO.setup(' +dropdown_pin+',GPIO.IN,pull_up_down=GPIO.PUD_DOWN)\n';
+            code += 'if ('+'GPIO.input(' +dropdown_pin+')==0):\n'+code_pressed+'\n\nelse:\n'+code_not_pressed+'\n\n';
             return code;
         };
         Blockly.Blocks.button_case = {
@@ -3511,10 +3568,11 @@ Blockly.Blocks.text_substring = {
 		Blockly.Python.button_long_short = function() {
             var dropdown_pin = this.getFieldValue('PIN');
             var code = '';
+            Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
             Blockly.Python.setups_['setup_button_' + dropdown_pin] = 'pinMode(' +dropdown_pin+',INPUT);\n';
-			Blockly.Python.definitions_['declare_var_button_active_'+dropdown_pin]='boolean _buttonActive_'+dropdown_pin+'=false;\n';
-			Blockly.Python.definitions_['declare_var_long_press_active_'+dropdown_pin]='boolean _longPressActive_'+dropdown_pin+'=false;\n';
-			Blockly.Python.definitions_['declare_var_button_timer_'+dropdown_pin]='long _buttonTimer_'+dropdown_pin+'=0;\n';	
+			Blockly.Python.definitions_['declare_var_button_active_'+dropdown_pin]='_buttonActive_'+dropdown_pin+'=false\n';
+			Blockly.Python.definitions_['declare_var_long_press_active_'+dropdown_pin]='_longPressActive_'+dropdown_pin+'=false\n';
+			Blockly.Python.definitions_['declare_var_button_timer_'+dropdown_pin]='_buttonTimer_'+dropdown_pin+'=0\n';	
 
 			var code_long_pressed = '';
 			var code_short_pressed = '';
@@ -3523,8 +3581,8 @@ Blockly.Blocks.text_substring = {
 
 			code_long_pressed = code_long_pressed.replace(/&quot;/g, '"');
 			code_short_pressed = code_short_pressed.replace(/&quot;/g, '"');
-
-			code+='if (digitalRead('+dropdown_pin+')==LOW) {\n    if (_buttonActive_'+dropdown_pin+'==false) {\n      _buttonActive_'+dropdown_pin+'=true;\n      _buttonTimer_'+dropdown_pin+'=millis();\n    }\n    if ((millis()-_buttonTimer_'+dropdown_pin+'>1000)&&(_longPressActive_'+dropdown_pin+'==false)){\n      _longPressActive_'+dropdown_pin+'=true;\n'+code_long_pressed+'\n}\n  }\n else {\n    if (_buttonActive_'+dropdown_pin+'== true){\n      if (_longPressActive_'+dropdown_pin+'==true){\n        _longPressActive_'+dropdown_pin+'=false;\n      }\n else  if (millis()-_buttonTimer_'+dropdown_pin+'>100){\n'+code_short_pressed+'\n}\n      _buttonActive_'+dropdown_pin+'=false;\n    }\n  }\n';
+			code += 'GPIO.setup('+dropdown_pin+',GPIO.IN,pull_up_down=GPIO.PUD_DOWN)\n';
+			code+='if (GPIO.input('+dropdown_pin+')==False) :\n    if (_buttonActive_'+dropdown_pin+'==false) :\n      _buttonActive_'+dropdown_pin+'=true\n      _buttonTimer_'+dropdown_pin+'=millis()\n    \n    if ((millis()-_buttonTimer_'+dropdown_pin+'>1000)&&(_longPressActive_'+dropdown_pin+'==false)):\n      _longPressActive_'+dropdown_pin+'=true\n'+code_long_pressed+'\n\n  \n else :\n    if (_buttonActive_'+dropdown_pin+'== true):\n      if (_longPressActive_'+dropdown_pin+'==true):\n        _longPressActive_'+dropdown_pin+'=false\n      \n else  if (millis()-_buttonTimer_'+dropdown_pin+'>100):\n'+code_short_pressed+'\n\n      _buttonActive_'+dropdown_pin+'=false\n    \n  \n';
 			return code;
         };
         Blockly.Blocks.button_long_short = {
@@ -3719,16 +3777,45 @@ Blockly.Blocks.text_substring = {
         };
 
     Blockly.Python.distance_us = function() {	
-		Blockly.Python.definitions_['include_us'] = JST['distance_us_definitions_include']({});
-		Blockly.Python.definitions_['define_us_pulseIn'] = JST['distance_us_definitions_pulseIn']({});
-        Blockly.Python.definitions_['define_us_init'] = JST['distance_us_definitions_us_init']({});
-        Blockly.Python.definitions_['define_us_distance'] = JST['distance_us_definitions_distance']({});
-		var code = '';
+		//Blockly.Python.definitions_['include_us'] = JST['distance_us_definitions_include']({});
+		//Blockly.Python.definitions_['define_us_pulseIn'] = JST['distance_us_definitions_pulseIn']({});
+        //Blockly.Python.definitions_['define_us_init'] = JST['distance_us_definitions_us_init']({});
+        //Blockly.Python.definitions_['define_us_distance'] = JST['distance_us_definitions_distance']({});
+        
+        Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpiobcm']({});
 		var echo_pin = this.getFieldValue('RED_PIN');
         var trigger_pin = this.getFieldValue('BLUE_PIN');
 		Blockly.Python.setups_['setup_us_' + echo_pin + trigger_pin] = JST['distance_us_setups_echo']({'echo_pin': echo_pin});
 		Blockly.Python.setups_['setup_us_2' + trigger_pin + echo_pin] = JST['distance_us_setups_trigger']({'trigger_pin': trigger_pin});
-		code += JST['distance_us']({'trigger_pin': trigger_pin,'echo_pin': echo_pin});
+		var code = 'print("Distance measurement in progress")\n'+
+		
+					'TRIG='+((__t = (trigger_pin)) == null ? '' : __t)+'\n'+
+'ECHO='+((__t = (echo_pin)) == null ? '' : __t)+'\n'+
+'GPIO.setup(TRIG,GPIO.OUT)\n'+
+'GPIO.setup(ECHO,GPIO.IN)\n'+
+
+'GPIO.output(TRIG, False)\n'+
+'time.sleep(2)\n'+
+'print("Waiting for sensor to settle")\n'+
+
+'GPIO.output(TRIG, True)\n'+
+'time.sleep(0.0001)\n'+
+'GPIO.output(TRIG, False)\n'+
+
+'while GPIO.input(ECHO)==0:\n'+
+  '	pulse_start=time.time()\n'+
+'while GPIO.input(ECHO)==1:\n'+
+  '	pulse_end=time.time()\n'+
+
+'pulse_duration=pulse_end-pulse_start\n'+
+'distance=pulse_duration*17150\n'+
+'distance=round(distance,2)\n'+
+'print("distance:",distance,"cm")\n'+
+'GPIO.cleanup()\n';
+		var echo_pin = this.getFieldValue('RED_PIN');
+        var trigger_pin = this.getFieldValue('BLUE_PIN');
+		Blockly.Python.setups_['setup_us_' + echo_pin + trigger_pin] = JST['distance_us_setups_echo']({'echo_pin': echo_pin});
+		Blockly.Python.setups_['setup_us_2' + trigger_pin + echo_pin] = JST['distance_us_setups_trigger']({'trigger_pin': trigger_pin});
 		return [code, Blockly.Python.ORDER_ATOMIC];
         };
 		
@@ -3751,10 +3838,9 @@ Blockly.Blocks.text_substring = {
         };
 
     Blockly.Python.distance_us_collision = function() {
-		Blockly.Python.definitions_['include_us'] = JST['distance_us_definitions_include']({});
-		Blockly.Python.definitions_['define_us_pulseIn'] = JST['distance_us_definitions_pulseIn']({});
-        Blockly.Python.definitions_['define_us_init'] = JST['distance_us_definitions_us_init']({});
-        Blockly.Python.definitions_['define_us_distance'] = JST['distance_us_definitions_distance']({});
+    
+        Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpiobcm']({});
+        
 		var echo_pin = this.getFieldValue('RED_PIN');
         var trigger_pin = this.getFieldValue('BLUE_PIN');
         var distance = Blockly.Python.valueToCode(this, 'DISTANCE', Blockly.Python.ORDER_ATOMIC);
@@ -3763,6 +3849,32 @@ Blockly.Blocks.text_substring = {
         var code = '';
 		Blockly.Python.setups_['setup_us_' + echo_pin + trigger_pin] = JST['distance_us_setups_echo']({'echo_pin': echo_pin});
 		Blockly.Python.setups_['setup_us_2' + trigger_pin + echo_pin] = JST['distance_us_setups_trigger']({'trigger_pin': trigger_pin});
+		
+		var code = 'print("Distance measurement in progress")\n'+
+		
+					'TRIG='+((__t = (trigger_pin)) == null ? '' : __t)+'\n'+
+'ECHO='+((__t = (echo_pin)) == null ? '' : __t)+'\n'+
+'GPIO.setup(TRIG,GPIO.OUT)\n'+
+'GPIO.setup(ECHO,GPIO.IN)\n'+
+
+'GPIO.output(TRIG, False)\n'+
+'time.sleep(2)\n'+
+'print("Waiting for sensor to settle")\n'+
+
+'GPIO.output(TRIG, True)\n'+
+'time.sleep(0.0001)\n'+
+'GPIO.output(TRIG, False)\n'+
+
+'while GPIO.input(ECHO)==0:\n'+
+  '	pulse_start=time.time()\n'+
+'while GPIO.input(ECHO)==1:\n'+
+  '	pulse_end=time.time()\n'+
+
+'pulse_duration=pulse_end-pulse_start\n'+
+'distance=pulse_duration*17150\n'+
+'distance=round(distance,2)\n'+
+'print("distance:",distance,"cm")\n'+
+'GPIO.cleanup()\n';
 		code += JST['distance_us_collision']({'trigger_pin': trigger_pin,'echo_pin': echo_pin,'distance': distance,'collision': collision,'not_collision': not_collision});
         return code;
         };
@@ -3792,7 +3904,10 @@ Blockly.Blocks.text_substring = {
 				var dropdown_pin = this.getFieldValue('PIN');
 				var code = '';
 				Blockly.Python.setups_['setup_green_digital_read' + dropdown_pin] = JST['inout_digital_read_setups']({'dropdown_pin': dropdown_pin});
-				code += JST['inout_digital_read']({'dropdown_pin': dropdown_pin});
+           		Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
+				//code += JST['inout_digital_read']({'dropdown_pin': dropdown_pin});
+				code += 'GPIO.setup(' + dropdown_pin+',GPIO.IN)\n';
+				code += 'GPIO.input(' + dropdown_pin+')\n';
 				return [code, Blockly.Python.ORDER_ATOMIC];
 			};
 
@@ -3815,22 +3930,22 @@ Blockly.Blocks.text_substring = {
 			var dropdown_pin = this.getFieldValue('PIN');
 			var code= '';
 			var pin='';
-			Blockly.Python.definitions_['define_simpleexpressions_buzzer_tone_'+dropdown_pin]='void _tone(int buzzerPin, float noteFrequency, long noteDuration, int silentDuration){\n  tone(buzzerPin, noteFrequency, noteDuration);\n  delay(noteDuration);\n  delay(silentDuration);\n}\n';
-			Blockly.Python.definitions_['define_simpleexpressions_buzzer_bendtones_'+dropdown_pin]='void bendTones (int buzzerPin, float initFrequency, float finalFrequency, float prop, long noteDuration, int silentDuration){\n  if(initFrequency < finalFrequency){\n    for (int i=initFrequency; i<finalFrequency; i=i*prop) {\n      _tone(buzzerPin,i,noteDuration,silentDuration);\n    }\n  }  else{\n    for (int i=initFrequency; i>finalFrequency; i=i/prop) {\n      _tone(buzzerPin,i,noteDuration,silentDuration);\n}\n}\n}\n';
+			Blockly.Python.definitions_['define_simpleexpressions_buzzer_tone_'+dropdown_pin]='import time\n def _tone(buzzerPin,noteFrequency,noteDuration,silentDuration):\n	tone(buzzerPin, noteFrequency, noteDuration)\n	time.sleep(noteDuration)\n	time.sleep(silentDuration)\n\n';
+			Blockly.Python.definitions_['define_simpleexpressions_buzzer_bendtones_'+dropdown_pin]='def bendTones(buzzerPin,initFrequency,finalFrequency,prop,noteDuration,silentDuration):\n	if(initFrequency < finalFrequency):\n	i=initFrequency\n		while( i<finalFrequency):\n			_tone(buzzerPin,i,noteDuration,silentDuration)\n			i=i*prop\n    \n	else:\n		i=initFrequency\n		while (i>finalFrequency):\n			_tone(buzzerPin,i,noteDuration,silentDuration)\n			i=i/prop\n\n';
 			pin = dropdown_pin+',';
 			var option=this.getFieldValue('OPTION');
 			if (option==='0')
-				code+='_tone('+pin+'659.26,50,30);\n_tone('+pin+'1318.51,55,25);\n_tone('+pin+'1760,60,10);\n';
+				code+='_tone('+pin+'659.26,50,30)\n_tone('+pin+'1318.51,55,25)\n_tone('+pin+'1760,60,10)\n';
 			else if (option==='1')
-				code+='_tone('+pin+'659.26,50,30);\n_tone('+pin+'1760,55,25);\n_tone('+pin+'1318.51,50,10);\n';
+				code+='_tone('+pin+'659.26,50,30)\n_tone('+pin+'1760,55,25)\n_tone('+pin+'1318.51,50,10)\n';
 			else if (option==='2')
-				code+='bendTones('+pin+'1318.51, 1567.98, 1.03, 20, 2);\ndelay(30);\nbendTones('+pin+'1318.51, 2349.32, 1.04, 10, 2);\n';
+				code+='bendTones('+pin+'1318.51, 1567.98, 1.03, 20, 2)\ntime.sleep(0.03)\nbendTones('+pin+'1318.51, 2349.32, 1.04, 10, 2)\n';
 			else if (option==='3')
-				code+='bendTones('+pin+'1318.51, 1760, 1.02, 30, 10);\n';
+				code+='bendTones('+pin+'1318.51, 1760, 1.02, 30, 10)\n';
 			else if (option==='4')
-				code+='bendTones('+pin+'1567.98, 2349.32, 1.03, 30, 10);\n';
+				code+='bendTones('+pin+'1567.98, 2349.32, 1.03, 30, 10)\n';
 			else if (option==='5')
-				code+='_tone('+pin+'1318.51,50,100);\n_tone('+pin+'1567.98,50,80);\n_tone('+pin+'2349.32,300,1);\n';
+				code+='_tone('+pin+'1318.51,50,100)\n_tone('+pin+'1567.98,50,80)\n_tone('+pin+'2349.32,300,1)\n';
             return code;
         };
 		
@@ -3857,7 +3972,7 @@ Blockly.Blocks.text_substring = {
 					this.setTooltip(PiBlocks.locales.getKey('LANG_PIEZO_BUZZER_PREDEF_SOUNDS_TOOLTIP'));
             }
         };
-		
+/*/		
 		Blockly.Python.piezo_buzzer_melody = function() {
 			var dropdown_pin = this.getFieldValue('PIN');
 			var code ='';
@@ -3898,6 +4013,7 @@ Blockly.Blocks.text_substring = {
 					Blockly.Python.play_melody='';
 			}
         };
+
 
 		function noteCreator(item,index){
 			var duration,note;
@@ -3968,7 +4084,8 @@ Blockly.Blocks.text_substring = {
 		});
 		
 		notes.forEach(noteCreator);
-
+/*/
+/*/
     Blockly.Python.piezo_music_end = function() {
         var code = ';';
         return [code, Blockly.Python.ORDER_ATOMIC];
@@ -3987,7 +4104,7 @@ Blockly.Blocks.text_substring = {
                 this.setTooltip(PiBlocks.locales.getKey('LANG_MUSIC_NOTE_TOOLTIP'));
             }
         };
-		
+/*/		
 			Blockly.Python.dc_motor1 = function() {
 				var dropdown_pin1 = this.getFieldValue('PIN1');
 				var dropdown_pin2 = this.getFieldValue('PIN2');
@@ -3996,21 +4113,29 @@ Blockly.Blocks.text_substring = {
 				var code = '';
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pin1] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pin1});
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pin2] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pin2});
-				code += '  {\n';
-				code +='    int _speed = ((((int)('+value_speed+'))*255)/100);\n';
-				code +='    if (_speed>0){\n';
-				code +='      analogWrite('+dropdown_pin1+',_speed);\n';
-				code +='      digitalWrite('+dropdown_pin2+',0);\n';
-				code +='    }\n';
-				code +='    else if (_speed<0){\n';
-				code +='       digitalWrite('+dropdown_pin1+',0);\n';
-				code +='       analogWrite('+dropdown_pin2+',_speed);\n';
-				code +='    }\n';
-				code +='    else{\n';
-				code +='      digitalWrite('+dropdown_pin1+',1);\n';
-				code +='      digitalWrite('+dropdown_pin2+',1);\n';
-				code +='    }\n';
-				code += '  }\n';
+				
+            	Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
+				code += '  \n';
+				code +='_speed = (('+value_speed+'*255)/100)\n';
+				code +='GPIO.setup('+dropdown_pin1+',GPIO.OUT)\n';
+				code +='GPIO.setup('+dropdown_pin2+',GPIO.OUT)\n';
+				code +='_forward=GPIO.PWM('+dropdown_pin1+',100)\n';
+				code +='_backward=GPIO.PWM('+dropdown_pin2+',100)\n';
+				code +='_forward.start(0)\n';
+				code +='_backward.start(0)\n';
+				code +='if (_speed>0):\n';
+				code +='	_forward.ChangeDutyCycle(_speed)\n';
+				code +='	_backward.ChangeDutyCycle(0)\n';
+				code +='\n';
+				code +='else if (_speed<0):\n';
+				code +='	_forward.ChangeDutyCycle(0)\n';
+				code +='	_backward.ChangeDutyCycle(_speed)\n';
+				code +='    \n';
+				code +='else:\n';
+				code +='	_forward.ChangeDutyCycle(1)\n';
+				code +='	_backward.ChangeDutyCycle(1)\n';
+				code +='    \n';
+				code += '  \n';
 				return code;
 			};
 
@@ -4046,23 +4171,26 @@ Blockly.Blocks.text_substring = {
 				var code = '';
 				var dropdown_pinR = this.getFieldValue('PIN_R');
 				var dropdown_pinG = this.getFieldValue('PIN_G');
+           		Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
+				code += 'GPIO.setup(' + dropdown_pinR+', GPIO.OUT)\n';
+				code += 'GPIO.setup(' + dropdown_pinG+', GPIO.OUT)\n';
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pinR] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pinR});
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pinG] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pinG});
 				var color = this.getFieldValue('COLOR') || '#000000';
 				if (color === '#000000')
-				{				
-					code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-					code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
 				}
 				else if (color ==='#ff0000')
 				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+					code += 'GPIO.output('+dropdown_pinR+', True)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
 				}
 				else if (color ==='#00ff00')
 				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', True)\n';
 				}
 				return code;
 			};
@@ -4097,54 +4225,86 @@ Blockly.Blocks.text_substring = {
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pinR] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pinR});
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pinG] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pinG});
 				Blockly.Python.setups_['setup_digital_write_' + dropdown_pinB] = JST['inout_digital_write_setups']({'dropdown_pin': dropdown_pinB});
+				
+           		Blockly.Python.definitions_['import_gpioboard'] = JST['import_gpioboard']({});
+				code += 'GPIO.setup(' + dropdown_pinR+', GPIO.OUT)\n';
+				code += 'GPIO.setup(' + dropdown_pinG+', GPIO.OUT)\n';
+				code += 'GPIO.setup(' + dropdown_pinB+', GPIO.OUT)\n';
 				var color = this.getFieldValue('COLOR') || '#000000';
+				console.log(color)
 				if (color === '#000000')
-				{				
-					code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-					code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
-					code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
+					code += 'GPIO.output('+dropdown_pinB+', False)\n';
+					
+					
+					//code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
+					//code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+					//code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
 				}
-				else if (color ==='#ffffff')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
+				else if (color ==='#FFFFFF')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', True)\n';
+					code += 'GPIO.output('+dropdown_pinG+', True)\n';
+					code += 'GPIO.output('+dropdown_pinB+', True)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
 				}
-				else if (color ==='#ff0000')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
+				else if (color ==='#FF0000')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', True)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
+					code += 'GPIO.output('+dropdown_pinB+', False)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
 				}
-				else if (color ==='#ffff00')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
+				else if (color ==='#FFFF00')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', True)\n';
+					code += 'GPIO.output('+dropdown_pinG+', True)\n';
+					code += 'GPIO.output('+dropdown_pinB+', False)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
 				}
-				else if (color ==='#00ff00')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
+				else if (color ==='#00FF00')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', True)\n';
+					code += 'GPIO.output('+dropdown_pinB+', False)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'LOW'});
 				}
-				else if (color ==='#00ffff')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
+				else if (color ==='#00FFFF')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', True)\n';
+					code += 'GPIO.output('+dropdown_pinB+', true)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
 				}
-				else if (color ==='#0000ff')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
+				else if (color ==='#0000FF')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', False)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
+					code += 'GPIO.output('+dropdown_pinB+', True)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
 				}
-				else if (color ==='#ff00ff')
-				{
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
-				  code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
+				else if (color ==='#FF00FF')
+				{		
+					code += 'GPIO.output('+dropdown_pinR+', True)\n';
+					code += 'GPIO.output('+dropdown_pinG+', False)\n';
+					code += 'GPIO.output('+dropdown_pinB+', True)\n';
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinR,'dropdown_stat': 'HIGH'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinG,'dropdown_stat': 'LOW'});
+				  //code += JST['inout_digital_write']({'dropdown_pin': dropdown_pinB,'dropdown_stat': 'HIGH'});
 				}
 				return code;
 			};
@@ -4163,8 +4323,9 @@ Blockly.Blocks.text_substring = {
 					this.appendDummyInput('').appendField(new Blockly.FieldImage("img/blocks/digital_signal_red.svg",20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN_R');
 					this.appendDummyInput('').appendField(new Blockly.FieldImage("img/blocks/digital_signal_green.svg",20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN_G');
 					this.appendDummyInput('').appendField(new Blockly.FieldImage("img/blocks/digital_signal_blue.svg",20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN_B');
-					this.setFieldValue('D3','PIN_G');
-					this.setFieldValue('D4','PIN_B');
+					this.setFieldValue(profiles.default.digital[0][1],'PIN_G');
+					this.setFieldValue(profiles.default.digital[1][1],'PIN_G');
+					this.setFieldValue(profiles.default.digital[2][1],'PIN_B');
 					this.appendDummyInput('').appendField(' ').appendField(colour,'COLOR');
 					this.setInputsInline(true);
 					this.setPreviousStatement(true,'code');
@@ -4177,14 +4338,13 @@ Blockly.Blocks.text_substring = {
 			Blockly.Python['led_strip'] = function(block) {
 			  var pixels = Blockly.Python.valueToCode(this,'PIXELS',Blockly.Python.ORDER_ATOMIC) || '';
 			  var input_pin = this.getFieldValue('PIN');
-			  Blockly.Python.definitions_['define_neopixel_h'] = '#include <Adafruit_NeoPixel.h>';
-			  Blockly.Python.definitions_['define_avr_power_h'] = '#ifdef __AVR__\n  #include <avr/power.h>\n#endif';
-			  Blockly.Python.definitions_['declare_var_led_strip_'+input_pin]='Adafruit_NeoPixel _led_strip_'+input_pin+'('+pixels+','+input_pin+', NEO_GRB + NEO_KHZ800);\n';
+			  var brightness = Blockly.Python.valueToCode(this,'BRIGHTNESS',Blockly.Python.ORDER_ATOMIC) || '';
+           	  Blockly.Python.definitions_['import_neopixel'] = JST['import_neopixel']({});
 
 			  Blockly.Python.setups_['setup_simpleexpressions_led_strip'+input_pin] = '_led_strip_'+input_pin+'.begin();\n  clearpixels_'+input_pin+'();\n  _led_strip_'+input_pin+'.setBrightness(map(10,0,100,0,255));\n';
 			  
-			  Blockly.Python.definitions_['define_clearpixels'+input_pin]='void clearpixels_'+input_pin+'()\n{\n  uint16_t n=_led_strip_'+input_pin+'.numPixels();\n  for(uint16_t i = 0; i < n; i++) {\n    _led_strip_'+input_pin+'.setPixelColor(i, 0);\n  }\n  delay(1);\n}\n';
-			  Blockly.Python.definitions_['define_writepixel'+input_pin]='void writepixel_'+input_pin+'(uint16_t pixel, int r, int g, int b)\n{ _led_strip_'+input_pin+'.setPixelColor(pixel, _led_strip_'+input_pin+'.Color(r, g, b));\n  _led_strip_'+input_pin+'.show();\n}\n';
+			  Blockly.Python.definitions_['define_clearpixels'+input_pin]='pixels=neopixel.NeoPixel(board.D'+input_pin+','+pixels+',brightness='+brightness/100+')';
+			  
 			  var code ='';
 			  
 			  try{
@@ -4192,7 +4352,7 @@ Blockly.Blocks.text_substring = {
 				  {
 					  var input_color = this.getFieldValue('COLOR'+i);
 					  var color_rgb=PiBlocks.hexToRgb(input_color);
-					  code+='writepixel_'+input_pin+'('+i+','+color_rgb.r +','+color_rgb.g+','+color_rgb.b+');\n';
+					  code+='pixels['+i+']='+'('+color_rgb.r +','+color_rgb.g+','+color_rgb.b+')\n';
 				  }
 			  }
 			  catch(e)
@@ -4209,6 +4369,8 @@ Blockly.Blocks.text_substring = {
 				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/led_strip.svg',20*options.zoom,20*options.zoom));
 				this.appendDummyInput('PIN').appendField(new Blockly.FieldImage('img/blocks/digital_signal.svg', 20*options.zoom, 20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN');
 				this.appendValueInput('PIXELS').appendField(new Blockly.FieldImage('img/blocks/led_pixel.svg',20*options.zoom,20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).setCheck(Number);
+				this.appendValueInput('BRIGHTNESS').appendField(new Blockly.FieldImage('img/blocks/sun.svg', 20*options.zoom, 20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).setCheck(Number);
+				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/percent.svg',20*options.zoom,20*options.zoom));
 				this.setPreviousStatement(true,'code');
 				this.setNextStatement(true,'code');
 				this.setInputsInline(true);
@@ -4243,38 +4405,6 @@ Blockly.Blocks.text_substring = {
 			  }
 			};
 			
-			Blockly.Python['led_strip_brightness'] = function(block) {
-			  var brightness = Blockly.Python.valueToCode(this,'BRIGHTNESS',Blockly.Python.ORDER_ATOMIC) || '';
-			  var input_pin = this.getFieldValue('PIN');
-			  Blockly.Python.definitions_['define_neopixel_h'] = '#include <Adafruit_NeoPixel.h>';
-			  Blockly.Python.definitions_['define_avr_power_h'] = '#ifdef __AVR__\n  #include <avr/power.h>\n#endif';
-			  Blockly.Python.definitions_['declare_var_led_strip_'+input_pin]='Adafruit_NeoPixel _led_strip_'+input_pin+'(7,'+input_pin+', NEO_GRB + NEO_KHZ800);\n';
-
-			  Blockly.Python.setups_['setup_simpleexpressions_led_strip'+input_pin] = '_led_strip_'+input_pin+'.begin();\n  clearpixels_'+input_pin+'();\n  _led_strip_'+input_pin+'.setBrightness(map(10,0,100,0,255));\n';
-			  
-			  var code='_led_strip_'+input_pin+'.setBrightness(map('+brightness+',0,100,0,255));\n' ;
-			  return code;
-			};
-			
-			Blockly.Blocks['led_strip_brightness'] = {
-			  category: PiBlocks.locales.getKey('LANG_CATEGORY_LIGHT'),
-			  category_colour: PiBlocks.LANG_COLOUR_LIGHT,
-			  colour: PiBlocks.LANG_COLOUR_LIGHT,
-			  keys: ['LANG_SIMPLEEXPRESSIONS_LED_STRIP_BRIGHTNESS_TOOLTIP'],
-			  init: function() {
-				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/led_strip.svg',20*options.zoom,20*options.zoom));
-				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/digital_signal.svg', 20*options.zoom, 20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(profiles.default.digital),'PIN');
-				this.appendValueInput('BRIGHTNESS').appendField(new Blockly.FieldImage('img/blocks/sun.svg', 20*options.zoom, 20*options.zoom)).setAlign(Blockly.ALIGN_RIGHT).setCheck(Number);
-				this.appendDummyInput('').appendField(new Blockly.FieldImage('img/blocks/percent.svg',20*options.zoom,20*options.zoom));
-				this.setPreviousStatement(true,'code');
-				this.setNextStatement(true,'code');
-				this.setInputsInline(true);
-				this.setColour(PiBlocks.LANG_COLOUR_LIGHT);
-				this.setTooltip(PiBlocks.locales.getKey('LANG_SIMPLEEXPRESSIONS_LED_STRIP_BRIGHTNESS_TOOLTIP'));
-			  }
-			};
-		
-        return Blockly.Blocks;
     }
 
 var PiBlocks = {

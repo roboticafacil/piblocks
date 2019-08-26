@@ -69,7 +69,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Restituisce il valore opposto.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Numero",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Operazione aritmetica",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Rimappa il valore dall'intervallo [0-1023] ad un altro.",
+				"LANG_MATH_SCALING_TOOLTIP": "Ridimensiona l'input da un intervallo a un altro intervallo.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Operazione min/max",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Restituisce un valore casuale tra i due estremi.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Restituisce il valore della variabile.",

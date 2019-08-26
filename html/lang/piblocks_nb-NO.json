@@ -65,7 +65,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Returnerer det motsatte av inngangen.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Antall",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Arithmetic operation",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Re-kartlegger input fra [0-1023] til en annen.",
+				"LANG_MATH_SCALING_TOOLTIP": "Re-skala inngangen fra et område til et annet område.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Min/max operation",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Returnerer et tilfeldig tall mellom to grenser.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Returnerer verdien til en variabel.",

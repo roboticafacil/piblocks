@@ -64,7 +64,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Returns the opposite of the input.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Number",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Arithmetic operation",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Re-map the input from [0-1023] to another.",
+				"LANG_MATH_SCALING_TOOLTIP": "Herschaalt de invoer van een bereik naar een ander bereik.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Arithmetic operation",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Returns a random number between the two limits.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Returns the value of a variable.",

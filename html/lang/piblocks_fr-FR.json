@@ -64,7 +64,7 @@
 				"LANG_LOGIC_NEGATE_TOOLTIP": "Renvoie l’opposé de l'entrée.",
 				"LANG_MATH_NUMBER_TOOLTIP": "Nombre",
 				"LANG_MATH_ARITHMETIC_TOOLTIP": "Opération arithmétique",
-				"LANG_MATH_BASE_MAP_TOOLTIP": "Rééchelonner les données entre [0-1023] sur un autre intervalle.",
+				"LANG_MATH_SCALING_TOOLTIP": "Redimensionne l'entrée d'une plage à une autre.",
 				"LANG_MATH_MINMAX_TOOLTIP": "Opération min/max",
 				"LANG_ADVANCED_MATH_RANDOM_TOOLTIP": "Renvoie un nombre aléatoire compris dans l’intervalle défini.",
 				"LANG_VARIABLES_GET_TOOLTIP": "Renvoie la valeur d’une variable.",
